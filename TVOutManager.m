@@ -26,18 +26,13 @@
 
 @implementation TVOutManager
 
-@synthesize tvSafeMode;
-
 + (TVOutManager *)sharedInstance
 {
-	static TVOutManager *sharedInstance;
+	static dispatch_once_t pred;
+	static TVOutManager *foo = nil;
 	
-	@synchronized(self)
-	{
-		if (!sharedInstance)
-			sharedInstance = [[TVOutManager alloc] init];
-		return sharedInstance;
-	}
+	dispatch_once(&pred, ^{ foo = [[self alloc] init]; });
+	return foo;
 }
 
 
@@ -64,6 +59,10 @@
 {
 	[[NSNotificationCenter defaultCenter] removeObserver: self];
 	[super dealloc];
+}
+
+-(BOOL) tvSafeMode {
+	return tvSafeMode;
 }
 
 -(void) setTvSafeMode:(BOOL) val
