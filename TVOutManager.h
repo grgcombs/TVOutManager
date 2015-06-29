@@ -6,8 +6,7 @@
 //  Copyright 2010 TouchCentric LLC. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
-
+@import UIKit;
 
 @interface TVOutManager : NSObject {
 
